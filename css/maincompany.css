@@ -1,0 +1,187 @@
+    .title{
+    color: #FFF;
+    text-shadow: 0px 6px 4px rgba(0, 0, 0, 0.40);
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -2.88px;
+    }
+    .btn-custom {
+      border-radius: 4px;
+      width: 100px;
+      height: 30px;
+      background: #29AE00;
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.40) inset;
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px white;
+    }
+    .btn-custom:hover{
+      opacity: 0.8;
+    }
+    .title-page2 {
+    color: #FFF;
+    font-family: Rubik;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    .gambarlogo{
+      width: 100px;
+    }
+    * {
+    box-sizing: border-box;
+    }
+
+    .box {
+    background-color: #384B42;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 1000px;
+    min-width: 70%;
+    }
+
+  
+    .section .col-md-12 a{
+      text-decoration: underline;
+      text-decoration-color: gold;
+      color: white;
+      font-size: 12px;
+    }
+    .section .col-md-12 a:hover{
+    color:white;
+    text-decoration-color: gold;
+    opacity: 0.8;
+    }
+
+
+    .member-logos {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .member-logo {
+        max-width: 90px;
+        max-height: 50px;
+        margin: 20px;
+        /* Optional styling for the logos */
+  }
+
+    @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+    }
+
+      /* Gaya untuk bagian "history" */
+      #about {
+        background: linear-gradient(-45deg, #384B42, #1E5D58, #7AB083);
+        background-size: 400% 400%;
+        animation: gradient 5s ease infinite;
+        color: white;
+        text-align: justify;
+        padding: 20px; 
+      }
+      
+      .image-gallery {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      border-radius: 5px; 
+    }
+
+    .image-gallery img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .image-gallery::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 2px solid transparent;
+      transition: border-color 0.3s ease-in-out;
+      box-sizing: border-box;
+
+    }
+
+    .image-gallery:hover::before {
+      border-color: white;
+    }
+
+    .image-gallery:hover img {
+      transform: scale(1.1);
+      opacity: 0.9;
+    }
+
+    /* navbar */
+    .navbar-brand,
+    .navbar-nav .nav-link,
+    .dropdown-menu .dropdown-item,
+    .login {
+      font-family: 'Rubik', sans-serif;
+    }
+    
+    .navbar-nav .nav-link{
+      color: #1A5A5F;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.10);
+    }
+    .navbar-nav .nav-link:hover{
+      opacity: 0.7;
+      color: green;
+    }
+    .navbar-nav .nav-link.active {
+    font-weight: 600;
+    color: #29AE00 !important; 
+    }
+    .navbar-nav .login:hover{
+      opacity: 0.9;
+      background-color: #29AE00;
+      color: white;
+    }
+    /* footer */
+    .last{
+      margin-left: -15px;
+      padding-left: 10px;
+      margin-right: -12px;
+  }
+
+    @media (max-width : 414px){
+      .navbar-brand,
+      .navbar-nav .nav-link,
+      .login {
+        padding-left : 50px;
+      }
+    }
+
+    @media (max-width: 375px) {
+      .ditengah {
+          text-align: center;
+      }
+      
+      .ditengah.col-md-2 {
+          width: 100px !important;
+          
+      }
+      
+      .ditengah.col-md-2.px-5 {
+          margin-right: 10px;
+      }
+  }

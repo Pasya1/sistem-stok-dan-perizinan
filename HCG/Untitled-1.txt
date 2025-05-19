@@ -1,0 +1,144 @@
+<button type="button" class="btn btn-success mx-1 mb-3 shadow" data-toggle="modal" data-target="#Import" style=" float: right;">
+
+                                <i class="fas fa-upload"></i> Import
+
+                            </button>
+
+<!-- Import Excel Modal -->
+
+<div class="modal fade" id="Import">
+    <div class="modal-dialog " >
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Import File Excel</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <form method="post" enctype="multipart/form-data">
+                <div class="modal-body mx-3 my-2">
+                    <div class="row">
+                    <input type="file" name="file_excel" accept=".xlsx, .xls" required>
+                    <!-- Tombol Submit -->
+                    <button type="submit" class="btn btn-primary form-control mt-4" name="importexcel">Import <i class="fas fa-upload"></i></button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="modal-footer" style="font-size: 12px;">
+                <p>*Gunakan format file Excel yang telah ditentukan. Download <a href="format_excel/Format Excel Barang Keluar.xlsx" style="text-decoration: underline;">disini</a></p>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Input Excel ke Database -->
+<?php
+
+require '../vendor/autoload.php';
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
+$spreadsheet = new Spreadsheet();
+
+if(isset($_POST['importexcel'])){
+    $err = '';
+    $ekstensi = '';
+
+    $file_name = $_FILES['file_excel']['name'];
+    $file_data = $_FILES['file_excel']['tmp_name'];
+
+    if(empty($file_name)){
+        $err .= "<li> Silahkan masukan file yang kamu inginkan.</li>";
+    }else{
+        $ekstensi = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+    }
+
+    $extensi_allowed = array("xls", "xlsx");
+    if(!in_array($ekstensi, $extensi_allowed)){
+        $err .= "<li>Silahkan masukan file tipe xls, atau xlsx. File yang kamu masukkan <b>$file_name</b> punya tipe <b>$ekstensi</b></li>";
+    }
+
+    if(empty($err)){
+        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile($file_data);
+        $spreadsheet = $reader->load($file_data);
+        $sheetData = $spreadsheet->getActiveSheet()->toArray();
+
+        $jumlahdata = 0;
+        $jumlahdata = 0;
+        foreach ($sheetData as $key => $rowData) {
+            // Skip header row
+            if ($key === 0) {
+                continue;
+            }
+    
+            $tanggal_keluar_exc = $rowData[0];
+            $nama_barang_exc = $rowData[1];
+            $qty_exc = $rowData[2];
+            $unit_exc = $rowData[3];
+            $keperluar_exc = $rowData[4];
+            $tujuan_exc = $rowData[5];
+            $keterangan_exc = $rowData[6];
+    
+            // Convert tanggal_keluar_exc format
+            $date_explode = explode(" ", $tanggal_keluar_exc);
+            $tanggal_keluar_exc = $date_explode[2]."-".$date_explode[1]."-".$date_explode[0];
+    
+            // Set status based on keperluan_exc
+            $status = ($keperluar_exc === "INTERNAL") ? "accepted" : "inprogress";
+    
+            // Insert into database
+            $query_add_keluar_exc = "INSERT INTO keluar (idbarang, jumlah, dokumentasi, namabarang, tanggal_keluar, keperluan, penerima, units, keterangank, status, kode_transaksi, user_edit_keluar) VALUES ('$idbarang', '$qty_exc', '$gambar_depan', '$nama_barang_exc', '$tanggal_keluar_exc', '$keperluar_exc', '$tujuan_exc', '$unit_exc', '$keterangan_exc', '$status', '$kodeTransaksi', '$username2')";
+    
+            if($query_add_keluar_exc){
+                echo '<script type="text/javascript">      
+    
+                        Swal.fire({
+    
+                            position: "center",
+    
+                            icon: "success",
+    
+                            title: "Data Telah Ditambahkan",
+    
+                            showConfirmButton: false,
+    
+                            timer: 1500
+    
+                        });
+    
+                        setTimeout(function () { 
+    
+                        window.location.href = "keluar.php"; 
+    
+                        }, 1500);
+    
+                        </script>';
+            }
+            
+            $jumlahdata++;
+        }
+        
+    }
+
+    if($err){
+        ?>
+        <div class="alert alert-danger">
+            <ul><?php echo $err ?></ul>
+        </div>
+        <?php
+    } else {
+        ?>
+        <div class="alert alert-success">
+            File berhasil diimpor.
+        </div>
+        <?php
+    }
+}
+?>

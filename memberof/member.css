@@ -1,0 +1,75 @@
+     /* navbar */
+     .navbar-nav .nav-link{
+        color: #1A5A5F;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.10);
+      }
+      .navbar-nav .nav-link:hover{
+        opacity: 0.7;
+        color: green;
+      }
+      .navbar-nav .nav-link.active {
+      font-weight: 600;
+      color: #29AE00 !important; 
+      }
+      .navbar-nav .login:hover{
+        opacity: 0.9;
+        background-color: #29AE00;
+        color: white;
+      }
+      /* footer */
+      .last{
+        margin-left: -15px;
+        padding-left: 10px;
+        margin-right: -12px;
+    }
+  
+      @media (max-width: 375px) {
+        .ditengah {
+            text-align: center;
+        }
+        
+        .ditengah.col-md-2 {
+            width: 100px !important;
+            
+        }
+        
+        .ditengah.col-md-2.px-5 {
+            margin-right: 10px;
+        }
+    }
+    
+
+    /* custom */
+    .btn-custom {
+        border-radius: 4px;
+        width: 100px;
+        height: 30px;
+        background-color: #fff;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.40) inset;
+        color: #1A5A5F;
+        font-size: 12px;
+        font-weight: 600;
+        border: 1px white;
+        position: relative;
+        z-index: 1000;
+      }
+      .btn-custom:hover{
+        opacity: 0.9;
+        background-color: #1A5A5F;
+        color: white;
+      }
+    .kotak{
+        border-radius: 5px;
+        width: 220px;
+        height: 90px;
+        background-color: #fff;
+        margin-left: -30px;
+    }
+
+    @media (max-width : 414px){
+      .navbar-brand,
+      .navbar-nav .nav-link,
+      .login {
+        padding-left : 50px;
+      }
+    }
